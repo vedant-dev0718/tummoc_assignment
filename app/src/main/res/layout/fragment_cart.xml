@@ -14,7 +14,7 @@
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="" />
+            tools:listitem="@layout/add_to_cart_item" />
 
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
