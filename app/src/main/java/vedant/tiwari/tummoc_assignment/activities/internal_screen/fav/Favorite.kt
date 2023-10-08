@@ -24,25 +24,19 @@ class Favorite : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFavoriteBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this)[FavoriteViewModel::class.java]
 
+        viewModel.getAllFavorites(requireContext())
+            .observe(viewLifecycleOwner, Observer { favoriteItems ->
+                if (favoriteItems != null) {
+                    val adapter = FavouriteAdapter(favoriteItems, viewModel)
+                    binding.favRv.adapter = adapter
+                } else {
+
+                }
+            })
         return binding.root
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[FavoriteViewModel::class.java]
-
-        viewModel.getAllFavorites(requireContext()).observe(viewLifecycleOwner, Observer { favoriteItems ->
-            if (favoriteItems != null) {
-                val adapter = FavouriteAdapter(favoriteItems, viewModel)
-                binding.favRv.adapter = adapter
-            } else {
-
-            }
-        })
-
-
-    }
 
 }

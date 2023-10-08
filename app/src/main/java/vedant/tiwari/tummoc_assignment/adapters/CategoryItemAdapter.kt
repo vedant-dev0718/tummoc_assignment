@@ -43,9 +43,11 @@ class CategoryItemAdapter(
             if (favoriteViewModel.checkIfFavoriteExists(itemView.context, item.id)) {
                 Glide.with(itemView.context).load(R.drawable.baseline_favorite_24)
                     .into(binding.fav)
+                fav = false
             } else {
                 Glide.with(itemView.context).load(R.drawable.baseline_favorite_border_24)
                     .into(binding.fav)
+                fav = true
             }
             binding.fav.setOnClickListener {
                 fav = if (fav) {
@@ -59,6 +61,7 @@ class CategoryItemAdapter(
                     )
                     false;
                 } else {
+                    favoriteViewModel.deleteFavorite(itemView.context, item.id)
                     Glide.with(itemView.context).load(R.drawable.baseline_favorite_border_24)
                         .into(binding.fav)
                     true;
