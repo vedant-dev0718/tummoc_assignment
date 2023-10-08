@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import vedant.tiwari.tummoc_assignment.R
+import vedant.tiwari.tummoc_assignment.activities.internal_screen.fav.FavoriteViewModel
 import vedant.tiwari.tummoc_assignment.databinding.CategoriesItemBinding
 import vedant.tiwari.tummoc_assignment.room_database.model.Category
 
-class MainAdapter(var categoryList: List<Category>) : RecyclerView.Adapter<MainAdapter
-.MainViewHolder>
-    () {
+class MainAdapter(var categoryList: List<Category>) :
+    RecyclerView.Adapter<MainAdapter
+    .MainViewHolder>
+        () {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter
     .MainViewHolder =
         MainViewHolder(

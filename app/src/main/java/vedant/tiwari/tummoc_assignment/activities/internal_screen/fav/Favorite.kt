@@ -1,12 +1,14 @@
 package vedant.tiwari.tummoc_assignment.activities.internal_screen.fav
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import vedant.tiwari.tummoc_assignment.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import vedant.tiwari.tummoc_assignment.adapters.FavouriteAdapter
+import vedant.tiwari.tummoc_assignment.databinding.FragmentFavoriteBinding
 
 class Favorite : Fragment() {
 
@@ -15,18 +17,31 @@ class Favorite : Fragment() {
     }
 
     private lateinit var viewModel: FavoriteViewModel
+    private lateinit var binding: FragmentFavoriteBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_favorite, container, false)
+    ): View {
+        binding = FragmentFavoriteBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = ViewModelProvider(this)[FavoriteViewModel::class.java]
+
+        viewModel.getAllFavorites(requireContext()).observe(viewLifecycleOwner, Observer { favoriteItems ->
+            if (favoriteItems != null) {
+                val adapter = FavouriteAdapter(favoriteItems, viewModel)
+                binding.favRv.adapter = adapter
+            } else {
+
+            }
+        })
+
+
     }
 
 }

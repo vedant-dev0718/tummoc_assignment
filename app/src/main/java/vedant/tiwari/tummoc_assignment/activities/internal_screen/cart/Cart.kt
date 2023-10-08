@@ -1,12 +1,12 @@
 package vedant.tiwari.tummoc_assignment.activities.internal_screen.cart
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import vedant.tiwari.tummoc_assignment.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import vedant.tiwari.tummoc_assignment.databinding.FragmentCartBinding
 
 class Cart : Fragment() {
 
@@ -15,12 +15,15 @@ class Cart : Fragment() {
     }
 
     private lateinit var viewModel: CartViewModel
+    private lateinit var binding: FragmentCartBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_cart, container, false)
+    ): View {
+        binding = FragmentCartBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
