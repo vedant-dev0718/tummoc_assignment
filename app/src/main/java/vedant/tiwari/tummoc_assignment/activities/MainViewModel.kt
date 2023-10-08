@@ -14,7 +14,6 @@ class MainViewModel : ViewModel() {
 
     fun getShopDetails(context: Context): LiveData<ShoppingTableModel> {
         liveDataShop = ShoppingRepo.getShopDetails(context)
-        Log.d("vedant", liveDataShop.toString())
         return liveDataShop
     }
 }

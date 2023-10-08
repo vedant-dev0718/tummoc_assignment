@@ -24,5 +24,7 @@ class ShoppingRepo {
             shoppingTableModel = shopDatabase.shopDao().getShopList()
             return shoppingTableModel
         }
+
+
     }
 }
