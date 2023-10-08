@@ -1,18 +1,15 @@
 package vedant.tiwari.tummoc_assignment.room_database
 
 import android.content.Context
-import android.util.Log
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.json.JSONArray
-import org.json.JSONObject
 import vedant.tiwari.tummoc_assignment.R
-import vedant.tiwari.tummoc_assignment.room_database.dao.ShoppingDao
-import vedant.tiwari.tummoc_assignment.room_database.entity.CategoriesItem
 import vedant.tiwari.tummoc_assignment.room_database.entity.ShoppingTableModel
+import vedant.tiwari.tummoc_assignment.room_database.model.ShoppingResponse
 
 class PrepopulateRoomCallback(private val context: Context) : RoomDatabase.Callback() {
 
@@ -23,32 +20,22 @@ class PrepopulateRoomCallback(private val context: Context) : RoomDatabase.Callb
             prePopulateUsers(context)
         }
     }
-    private suspend fun prePopulateUsers(context: Context) {
+
+    private fun prePopulateUsers(context: Context) {
         try {
             val userDao = ShoppingDatabase.getDatabaseClient(context).shopDao()
 
-            val shopping: JSONObject =
+            val shoppingResponse: ShoppingResponse =
                 context.resources.openRawResource(R.raw.shopping).bufferedReader().use {
-                    JSONObject(it.readText())
+                    val json = it.readText()
+                    Gson().fromJson(json, ShoppingResponse::class.java)
                 }
 
+            val shoppingTableModel = ShoppingTableModel(0, shoppingResponse)
+            userDao.insertAllShops(shoppingTableModel)
 
-
-//            userList.takeIf { it.length() > 0 }?.let { list ->
-//                for (index in 0 until list.length()) {
-//                    val obj = list.getJSONObject(index)
-//                    userDao.insertItem(
-//                       ShoppingTableModel (
-//                          obj.getString("message"),
-//                           obj.getString("error"),
-//                           obj.getBoolean("status"),
-//                        )
-//                    )
-//
-//                }
-
-//            }
         } catch (exception: Exception) {
+            // Handle exceptions here
         }
     }
 }
