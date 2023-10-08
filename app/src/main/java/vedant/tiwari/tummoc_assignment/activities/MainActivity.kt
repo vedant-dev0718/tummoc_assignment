@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var favoriteViewModel: FavoriteViewModel
     private lateinit var adapter: MainAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,14 +37,17 @@ class MainActivity : AppCompatActivity() {
             )
         }
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        favoriteViewModel = ViewModelProvider(this)[FavoriteViewModel::class.java]
 
         mainViewModel.getShopDetails(this).observe(this, Observer { shopDetails ->
             if (shopDetails != null) {
-                adapter = MainAdapter(shopDetails.shoppingResponse.categories)
+                adapter = MainAdapter(shopDetails.shoppingResponse.categories,favoriteViewModel)
                 binding.mainRv.adapter = adapter
             } else {
 
             }
         })
+
+
     }
 }

@@ -1,6 +1,5 @@
 package vedant.tiwari.tummoc_assignment.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +11,8 @@ import vedant.tiwari.tummoc_assignment.room_database.entity.FavoriteItem
 import vedant.tiwari.tummoc_assignment.room_database.model.Item
 
 class CategoryItemAdapter(
-    private var itemList: List<Item>
+    private var itemList: List<Item>,
+    var favoriteViewModel: FavoriteViewModel
 ) : RecyclerView
 .Adapter<CategoryItemAdapter.CategoryItemViewHolder>() {
 
@@ -40,18 +40,23 @@ class CategoryItemAdapter(
             binding.subTitle.text = item.name
             binding.money.text = "₹" + item.price
 //            Glide.with(itemView.context).load(Uri.parse(item.icon)).into(binding.cartImage)
-
-            Log.d("vedant", item.icon)
+            if (favoriteViewModel.checkIfFavoriteExists(itemView.context, item.id)) {
+                Glide.with(itemView.context).load(R.drawable.baseline_favorite_24)
+                    .into(binding.fav)
+            } else {
+                Glide.with(itemView.context).load(R.drawable.baseline_favorite_border_24)
+                    .into(binding.fav)
+            }
             binding.fav.setOnClickListener {
                 fav = if (fav) {
                     Glide.with(itemView.context).load(R.drawable.baseline_favorite_24)
                         .into(binding.fav)
-//                    favoriteViewModel.insertFavorite(
-//                        FavoriteItem(
-//                            item.id, item.name, item
-//                                .icon, item.price
-//                        )
-//                    )
+                    favoriteViewModel.insertFavorite(
+                        itemView.context, FavoriteItem(
+                            item.id, item.name, item
+                                .icon, item.price
+                        )
+                    )
                     false;
                 } else {
                     Glide.with(itemView.context).load(R.drawable.baseline_favorite_border_24)

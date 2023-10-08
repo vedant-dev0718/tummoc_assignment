@@ -6,7 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import vedant.tiwari.tummoc_assignment.room_database.converter.Converters
+import vedant.tiwari.tummoc_assignment.room_database.dao.FavoriteItemDao
 import vedant.tiwari.tummoc_assignment.room_database.dao.ShoppingDao
+import vedant.tiwari.tummoc_assignment.room_database.entity.FavoriteItem
 import vedant.tiwari.tummoc_assignment.room_database.entity.ShoppingTableModel
 
 
@@ -15,7 +17,6 @@ import vedant.tiwari.tummoc_assignment.room_database.entity.ShoppingTableModel
 abstract class ShoppingDatabase : RoomDatabase() {
 
     abstract fun shopDao(): ShoppingDao
-
 
     companion object {
         @Volatile

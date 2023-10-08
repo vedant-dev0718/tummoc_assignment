@@ -11,7 +11,7 @@ import vedant.tiwari.tummoc_assignment.activities.internal_screen.fav.FavoriteVi
 import vedant.tiwari.tummoc_assignment.databinding.CategoriesItemBinding
 import vedant.tiwari.tummoc_assignment.room_database.model.Category
 
-class MainAdapter(var categoryList: List<Category>) :
+class MainAdapter(var categoryList: List<Category>, var favoriteViewModel: FavoriteViewModel) :
     RecyclerView.Adapter<MainAdapter
     .MainViewHolder>
         () {
@@ -53,7 +53,7 @@ class MainAdapter(var categoryList: List<Category>) :
                     enable = true
                 }
             }
-            val adapter = CategoryItemAdapter(item.items)
+            val adapter = CategoryItemAdapter(item.items,favoriteViewModel)
             binding.mainRv.adapter = adapter
         }
     }

@@ -1,28 +1,38 @@
 package vedant.tiwari.tummoc_assignment.activities.internal_screen.fav
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import vedant.tiwari.tummoc_assignment.repositories.FavoriteRepo
 import vedant.tiwari.tummoc_assignment.room_database.entity.FavoriteItem
+import vedant.tiwari.tummoc_assignment.room_database.entity.ShoppingTableModel
 
-class FavoriteViewModel(private val repository: FavoriteRepo) : ViewModel() {
+class FavoriteViewModel : ViewModel() {
 
-    fun insertFavorite(favoriteItem: FavoriteItem) {
+    private lateinit var favList: LiveData<List<FavoriteItem>>
+
+    fun insertFavorite(context: Context, favoriteItem: FavoriteItem) {
         viewModelScope.launch {
-            repository.insertFavorite(favoriteItem)
+            FavoriteRepo.insertFavorite(context, favoriteItem)
         }
     }
 
     fun getAllFavorites(context: Context): LiveData<List<FavoriteItem>> {
-        return repository.getAllFavorites(context)
+        Log.d("vedant",FavoriteRepo.getAllFavorites(context).toString())
+        favList = FavoriteRepo.getAllFavorites(context)
+        return favList
     }
 
-    fun deleteFavorite(id: Int) {
+    fun deleteFavorite(context: Context, id: Int) {
         viewModelScope.launch {
-            repository.deleteFavorite(id)
+            FavoriteRepo.deleteFavorite(context, id)
         }
+    }
+
+    fun checkIfFavoriteExists(context: Context,id: Int):Boolean{
+        return FavoriteRepo.doesFavoriteExist(context, id)
     }
 }

@@ -48,7 +48,7 @@ class FavouriteAdapter(
                         .into(binding.fav)
                     false;
                 } else {
-                    viewModel.deleteFavorite(item.id)
+                    viewModel.deleteFavorite(itemView.context, item.id)
                     Glide.with(itemView.context).load(R.drawable.baseline_favorite_border_24)
                         .into(binding.fav)
                     true;
