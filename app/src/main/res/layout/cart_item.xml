@@ -23,25 +23,39 @@
 
                 <ImageView
                         android:src="@drawable/ele"
-                        android:layout_width="100dp"
+                        android:layout_width="120dp"
                         android:layout_marginTop="10dp"
                         android:padding="10dp"
                         android:layout_marginStart="15dp"
                         android:layout_marginEnd="10dp"
-                        android:layout_height="100dp"
+                        android:layout_height="120dp"
                         android:id="@+id/cart_image"
                         android:layout_weight="1" />
 
                 <ImageView
                         android:src="@drawable/baseline_favorite_border_24"
-                        android:layout_width="15dp"
+                        android:layout_width="25dp"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
-                        android:layout_height="15dp"
+                        android:layout_height="25dp"
                         android:id="@+id/fav"
                         android:layout_weight="1" />
             </LinearLayout>
+
+            <TextView
+                    android:id="@+id/sub_title"
+                    android:text="Elephant Frame"
+                    android:layout_marginEnd="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginStart="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black" />
 
             <LinearLayout
                     android:orientation="horizontal"
@@ -52,21 +66,9 @@
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:layout_marginBottom="5dp"
                         android:layout_weight="1"
+                        android:layout_marginBottom="5dp"
                         android:layout_height="wrap_content">
-
-                    <TextView
-                            android:id="@+id/sub_title"
-                            android:text="Elephant Frame"
-                            android:layout_width="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:singleLine="true"
-                            android:textSize="12dp"
-                            android:textStyle="bold"
-                            android:textColor="@color/black" />
 
                     <TextView
                             android:text="1 Unit"
@@ -74,7 +76,6 @@
                             android:textSize="10dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
-                            android:layout_marginStart="6dp"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black" />
 
@@ -85,7 +86,6 @@
                             android:textStyle="bold"
                             android:textSize="12dp"
                             android:textColor="@color/black"
-                            android:layout_marginStart="6dp"
                             android:id="@+id/money" />
                 </LinearLayout>
 
@@ -93,11 +93,10 @@
                         android:src="@drawable/plus"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_gravity="bottom"
-                        android:layout_marginBottom="6dp"
                         android:layout_marginEnd="20dp"
-                        android:id="@+id/add_to_cart"
-                        android:layout_weight="1" />
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/add_to_cart"/>
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

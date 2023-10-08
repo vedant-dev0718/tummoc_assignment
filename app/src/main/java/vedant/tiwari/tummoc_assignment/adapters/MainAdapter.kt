@@ -5,6 +5,8 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import vedant.tiwari.tummoc_assignment.R
 import vedant.tiwari.tummoc_assignment.databinding.CategoriesItemBinding
 import vedant.tiwari.tummoc_assignment.room_database.model.Category
 
@@ -31,15 +33,20 @@ class MainAdapter(var categoryList: List<Category>) : RecyclerView.Adapter<MainA
     inner class MainViewHolder(private val binding: CategoriesItemBinding) : RecyclerView.ViewHolder
         (binding.root) {
 
-        var enable = false;
+        var enable = true;
 
         fun bind(item: Category) {
             binding.title.text = item.name
+
             binding.expandedBtn.setOnClickListener {
                 if (enable) {
+                    Glide.with(itemView.context).load(R.drawable.baseline_keyboard_arrow_up_24)
+                        .into(binding.expandedBtn)
                     binding.mainRv.visibility = GONE
                     enable = false
                 } else {
+                    Glide.with(itemView.context).load(R.drawable.baseline_keyboard_arrow_down_24)
+                        .into(binding.expandedBtn)
                     binding.mainRv.visibility = VISIBLE
                     enable = true
                 }
